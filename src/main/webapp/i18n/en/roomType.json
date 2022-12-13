@@ -1,0 +1,9 @@
+{
+  "seatReservationApp": {
+    "RoomType": {
+      "null": "",
+      "CONFERENCE": "CONFERENCE",
+      "SHARED": "SHARED"
+    }
+  }
+}

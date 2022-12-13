@@ -1,0 +1,5 @@
+export enum ReservationViewMode {
+  RESERVATION_MODE_ALL = 'ALL',
+  RESERVATION_MODE_PENDING = 'PENDING',
+  RESERVATION_MODE_USER = 'USER',
+}

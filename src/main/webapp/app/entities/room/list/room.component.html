@@ -1,0 +1,120 @@
+<div>
+  <h2 id="page-heading" data-cy="RoomHeading">
+    <span appTranslate="seatReservationApp.room.home.title">Rooms</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="seatReservationApp.room.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-room"
+        [routerLink]="['/room/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="seatReservationApp.room.home.createLabel"> Create a new Room </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="rooms?.length === 0">
+    <span appTranslate="seatReservationApp.room.home.notFound">No Rooms found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="rooms && rooms.length > 0">
+    <table class="table" aria-describedby="page-heading">
+      <thead>
+        <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" appSortBy="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" appSortBy="name">
+            <span appTranslate="seatReservationApp.room.name">Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="map"><span appTranslate="seatReservationApp.room.map">Map</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" appSortBy="status">
+            <span appTranslate="seatReservationApp.room.status">Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="roomType">
+            <span appTranslate="seatReservationApp.room.roomType">Room Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col">
+            <span appTranslate="seatReservationApp.room.coordinates">Coordinates</span>
+          </th>
+          <th scope="col">
+            <span appTranslate="seatReservationApp.room.dimensions">Dimensions</span>
+          </th>
+          <th scope="col" appSortBy="floor.name">
+            <span appTranslate="seatReservationApp.room.floor">Floor</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let room of rooms; trackBy: trackId" data-cy="entityTable" class="tr-clickable" [routerLink]="['/room', room.id, 'view']">
+          <td>
+            <a [routerLink]="['/room', room.id, 'view']" (click)="$event.stopPropagation();">{{ room.id }}</a>
+          </td>
+          <td>{{ room.name }}</td>
+          <td>
+            <a *ngIf="room.map" (click)="openFile(room.map, room.mapContentType); $event.stopPropagation();">
+              <img [src]="'data:' + room.mapContentType + ';base64,' + room.map" style="max-height: 30px" alt="room image" />
+            </a>
+            <span *ngIf="room.map">{{ room.mapContentType }}, {{ byteSize(room.map) }}</span>
+          </td>
+          <td appTranslate="{{ 'seatReservationApp.AvailabilityStatus.' + room.status }}">{{ room.status }}</td>
+          <td appTranslate="{{ 'seatReservationApp.RoomType.' + room.roomType }}">{{ room.roomType }}</td>
+          <td>
+            <div *ngIf="room.coordinates">
+              <span>({{ room.coordinates.fromTop }} x {{ room.coordinates.fromLeft }}) - {{ room.coordinates.angle }}°</span>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="room.dimensions">
+              <span>({{ room.dimensions.height }} x {{ room.dimensions.width }})</span>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="room.floor">
+              <a (click)="$event.stopPropagation();" [routerLink]="['/floor', room.floor.id, 'view']">{{ room.floor.name }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+              <button type="submit" (click)="$event.stopPropagation();" [routerLink]="['/room', room.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(room); $event.stopPropagation();" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="rooms && rooms.length > 0">
+    <div class="d-flex justify-content-center">
+      <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

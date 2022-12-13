@@ -1,0 +1,119 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="app-building-heading" data-cy="BuildingCreateUpdateHeading" appTranslate="seatReservationApp.building.home.createOrEditLabel">
+        Create or edit a Building
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" appTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" appTranslate="seatReservationApp.building.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" appTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" appTranslate="seatReservationApp.building.location" for="field_location">Location</label>
+          <select
+            class="form-control"
+            id="field_location"
+            data-cy="location"
+            name="location"
+            formControlName="location"
+            [compareWith]="compareLocation"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="locationOption" *ngFor="let locationOption of locationsSharedCollection">{{ locationOption.name }}</option>
+          </select>
+        </div>
+
+        <form formGroupName="address">
+          <h4 id="app-address-heading" appTranslate="seatReservationApp.address.detail.title">
+            Address
+          </h4>
+          <hr />
+
+          <div class="row mb-3">
+            <label class="form-label" appTranslate="seatReservationApp.address.country" for="field_addressCountry">Country</label>
+            <input type="text" class="form-control" name="address.country" id="field_addressCountry" data-cy="address.country" formControlName="country" />
+            <div *ngIf="editForm.get('address.country')!.invalid && (editForm.get('address.country')!.dirty || editForm.get('address.country')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('address.country')?.errors?.required" appTranslate="entity.validation.required">
+                This field is required.
+              </small>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label class="form-label" appTranslate="seatReservationApp.address.city" for="field_addressCity">City</label>
+            <input type="text" class="form-control" name="address.city" id="field_addressCity" data-cy="address.city" formControlName="city" />
+            <div *ngIf="editForm.get('address.city')!.invalid && (editForm.get('address.city')!.dirty || editForm.get('address.city')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('address.city')?.errors?.required" appTranslate="entity.validation.required">
+                This field is required.
+              </small>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label class="form-label" appTranslate="seatReservationApp.address.postalCode" for="field_postalCode">Postal Code</label>
+            <input type="text" class="form-control" name="address.postalCode" id="field_postalCode" data-cy="address.postalCode" formControlName="postalCode" />
+            <div *ngIf="editForm.get('address.postalCode')!.invalid && (editForm.get('address.postalCode')!.dirty || editForm.get('address.postalCode')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('address.postalCode')?.errors?.required" appTranslate="entity.validation.required">
+                This field is required.
+              </small>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label class="form-label" appTranslate="seatReservationApp.address.stateProvince" for="field_stateProvince">State province</label>
+            <input type="text" class="form-control" name="address.stateProvince" id="field_stateProvince" data-cy="address.stateProvince" formControlName="stateProvince" />
+            <div *ngIf="editForm.get('address.stateProvince')!.invalid && (editForm.get('address.stateProvince')!.dirty || editForm.get('address.stateProvince')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('address.stateProvince')?.errors?.required" appTranslate="entity.validation.required">
+                This field is required.
+              </small>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label class="form-label" appTranslate="seatReservationApp.address.street" for="field_street">Street</label>
+            <input type="text" class="form-control" name="address.street" id="field_street" data-cy="address.street" formControlName="street" />
+            <div *ngIf="editForm.get('address.street')!.invalid && (editForm.get('address.street')!.dirty || editForm.get('address.street')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('address.street')?.errors?.required" appTranslate="entity.validation.required">
+                This field is required.
+              </small>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

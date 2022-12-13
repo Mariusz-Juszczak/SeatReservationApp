@@ -1,0 +1,113 @@
+<div>
+  <h2 id="page-heading" data-cy="SeatHeading">
+    <span appTranslate="seatReservationApp.seat.home.title">Seats</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="seatReservationApp.seat.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-seat"
+        [routerLink]="['/seat/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="seatReservationApp.seat.home.createLabel"> Create a new Seat </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="seats?.length === 0">
+    <span appTranslate="seatReservationApp.seat.home.notFound">No Seats found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="seats && seats.length > 0">
+    <table class="table" aria-describedby="page-heading">
+      <thead>
+        <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" appSortBy="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" appSortBy="seatNumber">
+            <span appTranslate="seatReservationApp.seat.seatNumber">Seat Number</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="name">
+            <span appTranslate="seatReservationApp.seat.name">Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="status">
+            <span appTranslate="seatReservationApp.seat.status">Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col">
+            <span appTranslate="seatReservationApp.seat.coordinates">Coordinates</span>
+          </th>
+          <th scope="col">
+            <span appTranslate="seatReservationApp.seat.dimensions">Dimensions</span>
+          </th>
+          <th scope="col" appSortBy="room.name">
+            <span appTranslate="seatReservationApp.seat.room">Room</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let seat of seats; trackBy: trackId" data-cy="entityTable" class="tr-clickable" [routerLink]="['/seat', seat.id, 'view']">
+          <td>
+            <a (click)="$event.stopPropagation();" [routerLink]="['/seat', seat.id, 'view']">{{ seat.id }}</a>
+          </td>
+          <td>{{ seat.seatNumber }}</td>
+          <td>{{ seat.name }}</td>
+          <td appTranslate="{{ 'seatReservationApp.AvailabilityStatus.' + seat.status }}">{{ seat.status }}</td>
+          <td>
+            <div *ngIf="seat.coordinates">
+              <span>({{ seat.coordinates.fromTop }} x {{ seat.coordinates.fromLeft }}) - {{ seat.coordinates.angle }}°</span>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="seat.dimensions">
+              <span>({{ seat.dimensions.height }} x {{ seat.dimensions.width }})</span>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="seat.room">
+              <a (click)="$event.stopPropagation();" [routerLink]="['/room', seat.room.id, 'view']">{{ seat.room.name }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <button type="submit" [routerLink]="['/seat', seat.id, 'edit']" (click)="$event.stopPropagation();" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+              <fa-icon icon="pencil-alt"></fa-icon>
+              <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+            </button>
+
+            <button type="submit" (click)="delete(seat); $event.stopPropagation();" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <fa-icon icon="times"></fa-icon>
+              <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="seats && seats.length > 0">
+    <div class="d-flex justify-content-center">
+      <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

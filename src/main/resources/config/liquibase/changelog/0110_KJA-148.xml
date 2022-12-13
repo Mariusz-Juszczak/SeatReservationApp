@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="0110_KJA-148" author="gamma_team">
+        <createTable tableName="seat">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="seat_number" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="status" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="coordinates_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_seat__coordinates_id" />
+            </column>
+            <column name="dimensions_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_seat__dimensions_id" />
+            </column>
+            <column name="room_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="0111_KJA-148" author="gamma_team" context="faker">
+        <loadData
+            file="config/liquibase/fake-data/seat.csv"
+            separator=";"
+            tableName="seat"
+            usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="seat_number" type="numeric"/>
+            <column name="name" type="string"/>
+            <column name="status" type="string"/>
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>

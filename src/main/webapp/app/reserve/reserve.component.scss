@@ -1,0 +1,22 @@
+@import 'src/main/webapp/content/scss/gl-variables';
+
+.row {
+  padding-top: 10px;
+}
+
+.reserveButton {
+  background-color: $global-logic-color;
+  border-radius: 5px;
+  color: white;
+}
+
+.mapButton{
+  background-color: $global-logic-color;
+  border-radius: 5px;
+  color: white;
+  width: 100%;
+}
+
+.table {
+  padding-top: 10px;
+}

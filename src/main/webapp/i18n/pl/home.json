@@ -1,0 +1,34 @@
+{
+  "home": {
+    "pageTitle": "SeatReservation",
+    "title": {
+      "logged": "Witaj {{firstName}}!",
+      "notLogged": "Witaj!"
+    },
+    "reservations": {
+      "upcoming": {
+        "title": "Nadchodzące rezerwacje"
+      },
+      "recent": {
+        "title": "Ostatnie rezerwacje"
+      }
+    },
+    "notifications": {
+      "title": "Notyfikacje"
+    },
+    "subtitle": "To jest twoja strona domowa",
+    "logged": {
+      "message": "Jesteś zalogowany jako użytkownik \"{{username}}\"."
+    },
+    "question": "Jeśli masz jakiekolwiek pytania na temat JHipster:",
+    "link": {
+      "homepage": "Strona domowa JHipster",
+      "stackoverflow": "JHipster na Stack Overflow",
+      "bugtracker": "JHipster bug tracker",
+      "chat": "Publiczny chat room JHipster",
+      "follow": "skontaktuj się z @jhipster na Twitterze"
+    },
+    "like": "Jeśli lubisz JHipster, nie zapomnij dać nam gwiazdki na",
+    "github": "GitHubie"
+  }
+}

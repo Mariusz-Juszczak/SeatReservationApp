@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="0080_KJA-148" author="gamma_team">
+
+        <addForeignKeyConstraint baseColumnNames="coordinates_id"
+                                 baseTableName="room"
+                                 constraintName="fk_room__coordinates_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="coordinates"/>
+
+        <addForeignKeyConstraint baseColumnNames="dimensions_id"
+                                 baseTableName="room"
+                                 constraintName="fk_room__dimensions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dimensions"/>
+
+        <addForeignKeyConstraint baseColumnNames="floor_id"
+                                 baseTableName="room"
+                                 constraintName="fk_room__floor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="floor"/>
+    </changeSet>
+</databaseChangeLog>

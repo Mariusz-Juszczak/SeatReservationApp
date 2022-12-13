@@ -1,0 +1,28 @@
+{
+  "seatReservationApp": {
+    "equipment": {
+      "home": {
+        "title": "Wyposażenie",
+        "refreshListLabel": "Odśwież",
+        "createLabel": "Dodaj Wyposażenie",
+        "createOrEditLabel": "Dodaj lub edytuj: Wyposażenie",
+        "notFound": "Nie znaleziono wypozażeń"
+      },
+      "created": "Utworzono nowy obiekt typu Wyposażenie z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Wyposażenie z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Wyposażenie z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Wyposażenie {{ id }}?"
+      },
+      "detail": {
+        "title": "Wyposażenie"
+      },
+      "title": "Wyposażenie",
+      "id": "ID",
+      "name": "Nazwa",
+      "type": "Type",
+      "description": "Description",
+      "seat": "Siedzenie"
+    }
+  }
+}

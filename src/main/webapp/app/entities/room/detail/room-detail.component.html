@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="room">
+      <h2 data-cy="roomDetailsHeading"><span appTranslate="seatReservationApp.room.detail.title">Room</span></h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ room.id }}</span>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.room.name">Name</span></dt>
+        <dd>
+          <span>{{ room.name }}</span>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.room.map">Map</span></dt>
+        <dd>
+          <div *ngIf="room.map">
+            <a (click)="openFile(room.map, room.mapContentType)">
+              <img [src]="'data:' + room.mapContentType + ';base64,' + room.map" style="max-width: 100%" alt="room image" />
+            </a>
+            {{ room.mapContentType }}, {{ byteSize(room.map) }}
+          </div>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.room.status">Status</span></dt>
+        <dd>
+          <span appTranslate="{{ 'seatReservationApp.AvailabilityStatus.' + room.status }}">{{ room.status }}</span>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.room.roomType">Room Type</span></dt>
+        <dd>
+          <span appTranslate="{{ 'seatReservationApp.RoomType.' + room.roomType }}">{{ room.roomType }}</span>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.room.coordinates">Coordinates</span></dt>
+        <dd>
+          <div *ngIf="room.coordinates">
+            ({{ room.coordinates.fromTop }} x {{ room.coordinates.fromLeft }}) - {{ room.coordinates.angle }}°
+          </div>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.room.dimensions">Dimensions</span></dt>
+        <dd>
+          <div *ngIf="room.dimensions">
+            <span>({{ room.dimensions.height }} x {{ room.dimensions.width }})</span>
+          </div>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.room.floor">Floor</span></dt>
+        <dd>
+          <div *ngIf="room.floor">
+            <a [routerLink]="['/floor', room.floor.id, 'view']">{{ room.floor.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/room', room.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

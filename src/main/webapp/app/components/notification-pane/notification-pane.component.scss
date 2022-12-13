@@ -1,0 +1,50 @@
+@import 'src/main/webapp/content/scss/gl-variables';
+
+h1 {
+  text-align: center;
+  padding-bottom: 24px;
+}
+
+.notification-created-at {
+  font-size: 10px;
+  text-align: right;
+}
+
+.close-button {
+
+}
+
+.notification-global-logic-alert {
+  background-color: white;
+  //color: bla;
+  font-weight: 500;
+  border-left: 5px solid $global-logic-color;
+  margin-bottom: 10px;
+}
+
+.notification-global-logic-alert-LOW {
+  @extend .notification-global-logic-alert;
+  border-left: 5px solid rgba($global-logic-color, 0.3);
+}
+
+.notification-global-logic-alert-MEDIUM {
+  @extend .notification-global-logic-alert;
+  border-left: 5px solid rgba($global-logic-color, 0.6);
+}
+
+.notification-global-logic-alert-HIGH {
+  @extend .notification-global-logic-alert;
+  border-left: 5px solid rgba($global-logic-color, 0.9);
+}
+
+button, input {
+  color: $global-logic-color;
+  font-size: 25px;
+  background: none;
+  border: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+

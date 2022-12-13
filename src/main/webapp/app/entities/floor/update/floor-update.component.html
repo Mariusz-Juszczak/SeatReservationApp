@@ -1,0 +1,137 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="app-floor-heading" data-cy="FloorCreateUpdateHeading" appTranslate="seatReservationApp.floor.home.createOrEditLabel">
+        Create or edit a Floor
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" appTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" appTranslate="seatReservationApp.floor.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" appTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" appTranslate="seatReservationApp.floor.number" for="field_number">Number</label>
+          <input type="number" class="form-control" name="number" id="field_number" data-cy="number" formControlName="number" />
+          <div *ngIf="editForm.get('number')!.invalid && (editForm.get('number')!.dirty || editForm.get('number')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('number')?.errors?.required" appTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('number')?.errors?.number" appTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" appTranslate="seatReservationApp.floor.building" for="field_building">Building</label>
+          <select
+            class="form-control"
+            id="field_building"
+            data-cy="building"
+            name="building"
+            formControlName="building"
+            [compareWith]="compareBuilding"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="buildingOption" *ngFor="let buildingOption of buildingsSharedCollection">{{ buildingOption.name }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" appTranslate="seatReservationApp.floor.map" for="field_map">Map</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('mapContentType')!.value + ';base64,' + editForm.get('map')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('map')!.value"
+              alt="floor image"
+            />
+            <div *ngIf="editForm.get('map')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start">{{ editForm.get('mapContentType')!.value }}, {{ byteSize(editForm.get('map')!.value!) }}</span>
+              <button
+                type="button"
+                (click)="clearInputImage('map', 'mapContentType', 'file_map')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_map"
+              data-cy="map"
+              (change)="setFileData($event, 'map', true)"
+              accept="image/*"
+              appTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="map" id="field_map" data-cy="map" formControlName="map" />
+          <input type="hidden" class="form-control" name="mapContentType" id="field_mapContentType" formControlName="mapContentType" />
+        </div>
+
+
+        <form formGroupName="dimensions">
+          <h4 id="app-address-heading" appTranslate="seatReservationApp.dimensions.detail.title">Dimensions</h4>
+          <hr />
+
+
+          <div class="row mb-3">
+            <label class="form-label" appTranslate="seatReservationApp.dimensions.height" for="field_dimensionsHeight">Height</label>
+            <input type="number" class="form-control" name="dimensions.city" id="field_dimensionsHeight" data-cy="dimensions.height" formControlName="height" />
+            <div *ngIf="editForm.get('dimensions.height')!.invalid && (editForm.get('dimensions.height')!.dirty || editForm.get('dimensions.height')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('dimensions.height')?.errors?.required" appTranslate="entity.validation.required">
+                This field is required.
+              </small>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label class="form-label" appTranslate="seatReservationApp.dimensions.width" for="field_dimensionsWidth">Width</label>
+            <input type="number" class="form-control" name="dimensions.width" id="field_dimensionsWidth" data-cy="dimensions.width" formControlName="width" />
+            <div *ngIf="editForm.get('dimensions.width')!.invalid && (editForm.get('dimensions.width')!.dirty || editForm.get('dimensions.width')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('dimensions.width')?.errors?.required" appTranslate="entity.validation.required">
+                This field is required.
+              </small>
+              <small class="form-text text-danger" [hidden]="!editForm.get('dimensions.width')?.errors?.number" appTranslate="entity.validation.number">
+                This field should be a number.
+              </small>
+            </div>
+          </div>
+
+        </form>
+
+
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

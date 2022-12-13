@@ -1,0 +1,8 @@
+{
+  "reservation": {
+    "title": "Rezerwacja",
+    "description": "Prosze wybrać miejsce do zarezerwowania",
+    "reserve": "Rezerwuj",
+    "map": "Mapa"
+  }
+}

@@ -1,0 +1,101 @@
+<div>
+  <h2 id="page-heading" data-cy="BuildingHeading">
+    <span appTranslate="seatReservationApp.building.home.title">Buildings</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="seatReservationApp.building.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-building"
+        [routerLink]="['/building/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="seatReservationApp.building.home.createLabel"> Create a new Building </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="buildings?.length === 0">
+    <span appTranslate="seatReservationApp.building.home.notFound">No Buildings found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="buildings && buildings.length > 0">
+    <table class="table" aria-describedby="page-heading">
+      <thead>
+        <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" appSortBy="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" appSortBy="name">
+            <span appTranslate="seatReservationApp.building.name">Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="location.name">
+            <span appTranslate="seatReservationApp.building.location">Location</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col">
+            <span appTranslate="seatReservationApp.building.address">Address</span>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let building of buildings; trackBy: trackId" data-cy="entityTable" class="tr-clickable" [routerLink]="['/building', building.id, 'view']">
+          <td>
+            <a [routerLink]="['/building', building.id, 'view']">{{ building.id }}</a>
+          </td>
+          <td>{{ building.name }}</td>
+          <td>
+            <div *ngIf="building.location">
+              <a (click)="$event.stopPropagation();" [routerLink]="['/location', building.location.id, 'view']">{{ building.location.name }}</a>
+            </div>
+          </td>
+          <td>{{ building.address?.country }}<span *ngIf="building.address">,</span> {{ building.address?.city }} {{ building.address?.street }}</td>
+
+          <td class="text-end">
+            <button
+              type="submit"
+              [routerLink]="['/building', building.id, 'edit']"
+              class="btn btn-primary btn-sm"
+              data-cy="entityEditButton"
+              (click)="$event.stopPropagation();"
+
+            >
+              <fa-icon icon="pencil-alt"></fa-icon>
+              <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+            </button>
+
+            <button type="submit" (click)="delete(building); $event.stopPropagation();" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <fa-icon icon="times"></fa-icon>
+              <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="buildings && buildings.length > 0">
+    <div class="d-flex justify-content-center">
+      <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

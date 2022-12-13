@@ -1,0 +1,30 @@
+{
+  "seatReservationApp": {
+    "floor": {
+      "home": {
+        "title": "Piętro",
+        "refreshListLabel": "Odśwież",
+        "createLabel": "Dodaj Piętro",
+        "createOrEditLabel": "Dodaj lub edytuj: Piętro",
+        "notFound": "Nie znaleziono pięter"
+      },
+      "created": "Utworzono nowy obiekt typu Piętro z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Piętro z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Piętro z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Piętro {{ id }}?"
+      },
+      "detail": {
+        "title": "Piętro"
+      },
+      "title": "Piętro",
+      "id": "ID",
+      "name": "Nazwa",
+      "number": "Number",
+      "map": "Mapa",
+      "dimensions": "Wymiary",
+      "rooms": "Pokoje",
+      "building": "Budynek"
+    }
+  }
+}

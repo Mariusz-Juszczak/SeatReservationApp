@@ -1,0 +1,9 @@
+{
+  "seatReservationApp": {
+    "RestrictionType": {
+      "null": "",
+      "PERCENTAGE": "Procentowa",
+      "PER_SEATS_NUMBER": "Co ile miejsc"
+    }
+  }
+}

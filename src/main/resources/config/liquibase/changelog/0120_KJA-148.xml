@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="0120_KJA-148" author="gamma_team">
+        <createTable tableName="coordinates">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="from_top" type="double">
+                <constraints nullable="false" />
+            </column>
+            <column name="from_left" type="double">
+                <constraints nullable="false" />
+            </column>
+            <column name="angle" type="double">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="0121_KJA-148" author="gamma_team" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/coordinates.csv"
+                  separator=";"
+                  tableName="coordinates"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="from_top" type="numeric"/>
+            <column name="from_left" type="numeric"/>
+            <column name="angle" type="numeric"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

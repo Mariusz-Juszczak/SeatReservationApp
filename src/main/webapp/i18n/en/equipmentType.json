@@ -1,0 +1,14 @@
+{
+  "seatReservationApp": {
+    "EquipmentType": {
+      "null": "",
+      "MONITOR": "Monitor",
+      "MOUSE": "Mouse",
+      "KEYBOARD": "Keyboard",
+      "HEADPHONES": "Headset",
+      "DOCKING_STATION": "Docking station",
+      "CAMERA": "Camera",
+      "NOTEBOOK": "Notebook"
+    }
+  }
+}

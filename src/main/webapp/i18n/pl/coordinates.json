@@ -1,0 +1,28 @@
+{
+  "seatReservationApp": {
+    "coordinates": {
+      "home": {
+        "title": "Współrzędne",
+        "refreshListLabel": "Odśwież",
+        "createLabel": "Dodaj Współrzędne",
+        "createOrEditLabel": "Dodaj lub edytuj: Współrzędne",
+        "notFound": "Nie znaleziono Współrzędnych"
+      },
+      "created": "Utworzono nowy obiekt typu Współrzędne z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Współrzędne z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Współrzędne z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Współrzędne {{ id }}?"
+      },
+      "detail": {
+        "title": "Współrzędne"
+      },
+      "id": "ID",
+      "fromTop": "Od góra",
+      "fromLeft": "Od lewo",
+      "angle": "Kąt",
+      "seat": "Siedzenie",
+      "room": "Pokój"
+    }
+  }
+}

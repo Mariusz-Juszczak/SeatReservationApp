@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="restrictions">
+      <h2 data-cy="restrictionsDetailsHeading"><span appTranslate="seatReservationApp.restrictions.detail.title">Restrictions</span></h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ restrictions.id }}</span>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.restrictions.name">Name</span></dt>
+        <dd>
+          <span>{{ restrictions.name }}</span>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.restrictions.fromDate">From Date</span></dt>
+        <dd>
+          <span>{{ restrictions.fromDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.restrictions.toDate">To Date</span></dt>
+        <dd>
+          <span>{{ restrictions.toDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.restrictions.restrictionType">Restriction Type</span></dt>
+        <dd>
+          <span appTranslate="{{ 'seatReservationApp.RestrictionType.' + restrictions.restrictionType }}">{{
+            restrictions.restrictionType
+          }}</span>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.restrictions.restrictionValue">Restriction Value</span></dt>
+        <dd>
+          <span>{{ restrictions.restrictionValue }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/restrictions', restrictions.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

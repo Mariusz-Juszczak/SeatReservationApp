@@ -1,0 +1,81 @@
+<div>
+  <h2 id="page-heading" data-cy="NotificationAlertHeading">
+    <span appTranslate="seatReservationApp.notificationAlert.home.title">Notifications</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="seatReservationApp.notificationAlert.home.refreshListLabel">Refresh list</span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="notificationAlerts?.length === 0">
+    <span appTranslate="seatReservationApp.notificationAlert.home.notFound">No Notifications found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="notificationAlerts && notificationAlerts.length > 0">
+    <table class="table" aria-describedby="page-heading">
+      <thead>
+        <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" appSortBy="title">
+            <span appTranslate="seatReservationApp.notificationAlert.title">Title</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="message">
+            <span appTranslate="seatReservationApp.notificationAlert.message">Message</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="createdAt">
+            <span appTranslate="seatReservationApp.notificationAlert.createdAt">Created At</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="notificationState">
+            <span appTranslate="seatReservationApp.notificationAlert.notificationState">Notification State</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let notificationAlert of notificationAlerts; trackBy: trackId" data-cy="entityTable"
+            [ngClass]="(notificationAlert.notificationState === 'NEW' ? 'tr-new' : '') + ' notification-global-logic-table-' + notificationAlert.notificationPriority"
+            (click)="navigateToView(notificationAlert)"
+            class="tr-clickable"
+        >
+          <td>{{ notificationAlert.title }}</td>
+          <td> {{ (notificationAlert.message?.length ?? 0 > 128)? (notificationAlert.message | slice:0:128) + '...' : notificationAlert.message }}</td>
+          <td>{{ notificationAlert.createdAt | formatMediumDatetime }}</td>
+          <td appTranslate="{{ 'seatReservationApp.NotificationState.' + notificationAlert.notificationState }}">
+            {{ notificationAlert.notificationState }}
+          </td>
+          <td class="text-end" >
+              <button type="submit" (click)="delete(notificationAlert); $event.stopPropagation();" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="trash-alt"></fa-icon>
+              </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="notificationAlerts && notificationAlerts.length > 0">
+    <div class="d-flex justify-content-center">
+      <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

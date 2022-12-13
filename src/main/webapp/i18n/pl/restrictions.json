@@ -1,0 +1,33 @@
+{
+  "seatReservationApp": {
+    "restrictions": {
+      "home": {
+        "title": "Restrykcje",
+        "refreshListLabel": "Odśwież",
+        "createLabel": "Dodaj Restrykcje",
+        "createOrEditLabel": "Dodaj lub edytuj: Restrykcje",
+        "notFound": "Nie znaleziono restrykcji"
+      },
+      "created": "Utworzono nowy obiekt typu Restrykcja z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Restrykcja z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Restrykcja z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Restrykcje {{ id }}?"
+      },
+      "detail": {
+        "title": "Restrykcje"
+      },
+      "id": "ID",
+      "name": "Nazwa",
+      "fromDate": "Od",
+      "toDate": "Do",
+      "restrictionType": "Typ restrykcji",
+      "restrictionValue": "Wartość restrykcji",
+      "currentRestriction": "Obecna restrykcja:",
+      "type": {
+        "PERCENTAGE": "Dozwolone {{ restrictedValue }}% miejsc",
+        "PER_SEATS_NUMBER": "Dozwolone co {{ restrictedValue }} miejsce"
+      }
+    }
+  }
+}

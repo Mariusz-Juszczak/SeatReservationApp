@@ -1,0 +1,10 @@
+{
+  "seatReservationApp": {
+    "NotificationPriority": {
+      "null": "",
+      "HIGH": "Wysoko",
+      "MEDIUM": "Średni",
+      "LOW": "Niski"
+    }
+  }
+}

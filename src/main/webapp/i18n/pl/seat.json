@@ -1,0 +1,32 @@
+{
+  "seatReservationApp": {
+    "seat": {
+      "home": {
+        "title": "Siedzenie",
+        "refreshListLabel": "Odśwież",
+        "createLabel": "Dodaj Siedzenie",
+        "createOrEditLabel": "Dodaj lub edytuj: Siedzenie",
+        "notFound": "Nie znaleziono siedzeń"
+      },
+      "created": "Utworzono nowy obiekt typu Siedzenie z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Siedzenie z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Siedzenie z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Siedzenie {{ id }}?"
+      },
+      "detail": {
+        "title": "Siedzenie"
+      },
+      "title": "Siedzenie",
+      "id": "ID",
+      "seatNumber": "Number",
+      "name": "Nzwa siedzenia",
+      "status": "Status",
+      "coordinates": "Współrzędne",
+      "dimensions": "Wymiary",
+      "seatReserved": "Rezerwacja",
+      "equipments": "Wypozażenie",
+      "room": "Pokój"
+    }
+  }
+}

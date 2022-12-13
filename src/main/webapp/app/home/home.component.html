@@ -1,0 +1,14 @@
+<div [ngSwitch]="account !== null">
+  <div *ngSwitchCase="true">
+
+    <div class="row" *ngIf="account">
+      <app-home-logged firstNameAttribute="{{account.firstName}}"></app-home-logged>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="false" class="row">
+    <app-home-not-logged></app-home-not-logged>
+  </div>
+
+</div>
+

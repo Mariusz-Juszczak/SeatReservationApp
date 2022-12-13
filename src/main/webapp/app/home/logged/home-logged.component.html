@@ -1,0 +1,48 @@
+<h1 class="display-4"><span appTranslate="home.title.logged" [translateValues]="{ firstName: firstName }">Welcome, {{firstName }}!</span></h1>
+
+<div class="row">
+
+  <div class="col-md-3">
+    <span class="hipster img-fluid rounded"></span>
+  </div>
+
+  <div class="col-md-6">
+
+    <div *ngIf="restriction">
+      <div class="alert alert-global-logic">
+        <span appTranslate="seatReservationApp.restrictions.currentRestriction">Current restriction:</span>
+        <span appTranslate="seatReservationApp.restrictions.type.{{restriction.restrictionType}}" [translateValues]="{ restrictedValue: restriction.restrictionValue }">
+          {{restriction.restrictionType}}: {{restriction.restrictionValue}}
+        </span>
+      </div>
+    </div>
+
+    <div>
+      <h3><span appTranslate="home.reservations.upcoming.title">Upcoming reservations</span></h3>
+      <app-reserved-view [reservedSeats]="upcomingReservedSeats"></app-reserved-view>
+    </div>
+
+    <div>
+      <h3><span appTranslate="home.reservations.recent.title">Recent reservations</span></h3>
+      <app-reserved-view [reservedSeats]="recentReservedSeats"></app-reserved-view>
+    </div>
+  </div>
+
+  <div class="col-md-3 container">
+
+    <h3 class="notification-title"><span appTranslate="home.notifications.title">Notifications</span></h3>
+
+    <button class="rounded-button" type="button" data-close (click)="loadNotifications()" [disabled]="isNotificationsLoading">
+      <fa-icon icon="sync" [spin]="isNotificationsLoading"></fa-icon>
+    </button>
+
+
+    <div class="table-responsive" id="notificationEntities" *ngIf="notifications && notifications.length > 0">
+
+      <div *ngFor="let notification of notifications; trackBy: trackId">
+        <app-notification-pane [notification]="notification" (closeNotification)="loadNotifications()" ></app-notification-pane>
+      </div>
+
+    </div>
+  </div>
+</div>

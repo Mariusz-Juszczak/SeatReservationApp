@@ -1,0 +1,35 @@
+<div class="alert alert-warning" id="recentReservedSeats-no-result" *ngIf="reservedSeats?.length === 0">
+  <span appTranslate="seatReservationApp.seatReserved.home.notFound">No Reserved seats found</span>
+</div>
+
+<div class="table-responsive" id="reservedSeats-entities" *ngIf="reservedSeats && reservedSeats.length > 0">
+  <table class="table" aria-describedby="page-heading">
+    <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">
+        <span appTranslate="seatReservationApp.seatReserved.fromDate">From Date</span>
+      </th>
+      <th scope="col">
+        <span appTranslate="seatReservationApp.seatReserved.toDate">To Date</span>
+      </th>
+      <th scope="col">
+        <span appTranslate="seatReservationApp.seat.title">Seat</span>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let reservedSeat of reservedSeats" data-cy="entityTable" class="tr-clickable" [routerLink]="['/my-reservations', reservedSeat.id, 'view']">
+      <td [ngSwitch]="reservedSeat.reservationStatus">
+        <fa-icon ngbTooltip="CANCELLED" *ngSwitchCase="'CANCELLED'" icon="ban" ></fa-icon>
+        <fa-icon ngbTooltip="PENDING" *ngSwitchCase="'PENDING'" icon="clock"></fa-icon>
+        <fa-icon ngbTooltip="ACTIVE" *ngSwitchCase="'ACTIVE'" icon="check"></fa-icon>
+      </td>
+      <td>{{ reservedSeat.fromDate | formatMediumDatetime }}</td>
+      <td>{{ reservedSeat.toDate | formatMediumDatetime }}</td>
+
+      <td>B: {{ reservedSeat.buildingName}} ({{ reservedSeat.buildingAddress}}) | F: {{reservedSeat.floorName}} | R: {{reservedSeat.roomName}} | S: {{reservedSeat.seatName}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

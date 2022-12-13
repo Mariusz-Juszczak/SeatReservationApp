@@ -1,0 +1,27 @@
+{
+  "seatReservationApp": {
+    "location": {
+      "home": {
+        "title": "Lokacja",
+        "refreshListLabel": "Odśwież",
+        "createLabel": "Dodaj Lokacje",
+        "createOrEditLabel": "Dodaj lub edytuj: Lokacje",
+        "notFound": "Nie znaleziono lokacji"
+      },
+      "created": "Utworzono nowy obiekt typu Lokacja z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Lokacja z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Lokacja z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Lokacje {{ id }}?"
+      },
+      "detail": {
+        "title": "Lokacja"
+      },
+      "title": "Lokacja",
+      "id": "ID",
+      "name": "Nazwa",
+      "buildings": "Budynek",
+      "locationAdmins": "Location Admins"
+    }
+  }
+}

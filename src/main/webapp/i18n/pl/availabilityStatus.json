@@ -1,0 +1,11 @@
+{
+  "seatReservationApp": {
+    "AvailabilityStatus": {
+      "null": "",
+      "FREE": "Dostępny",
+      "OCCUPIED": "Zajęty",
+      "UNAVAILABLE": "Niedostępny",
+      "RESTRICTED": "Ograniczony"
+    }
+  }
+}

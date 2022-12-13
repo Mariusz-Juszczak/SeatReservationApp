@@ -1,0 +1,28 @@
+{
+  "seatReservationApp": {
+    "dimensions": {
+      "home": {
+        "title": "Dimensions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Dimensions",
+        "createOrEditLabel": "Create or edit a Dimensions",
+        "notFound": "No Dimensions found"
+      },
+      "created": "A new Dimensions is created with identifier {{ param }}",
+      "updated": "A Dimensions is updated with identifier {{ param }}",
+      "deleted": "A Dimensions is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Dimensions {{ id }}?"
+      },
+      "detail": {
+        "title": "Dimensions"
+      },
+      "id": "ID",
+      "height": "Height",
+      "width": "Width",
+      "seat": "Seat",
+      "room": "Room",
+      "floor": "Floor"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+<div>
+  <h2 id="page-heading" data-cy="RestrictionsHeading">
+    <span appTranslate="seatReservationApp.restrictions.home.title">Restrictions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="seatReservationApp.restrictions.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-restrictions"
+        [routerLink]="['/restrictions/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="seatReservationApp.restrictions.home.createLabel"> Create a new Restrictions </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="restrictions?.length === 0">
+    <span appTranslate="seatReservationApp.restrictions.home.notFound">No Restrictions found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="restrictions && restrictions.length > 0">
+    <table class="table" aria-describedby="page-heading">
+      <thead>
+        <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" appSortBy="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" appSortBy="name">
+            <span appTranslate="seatReservationApp.restrictions.name">Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="fromDate">
+            <span appTranslate="seatReservationApp.restrictions.fromDate">From Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="toDate">
+            <span appTranslate="seatReservationApp.restrictions.toDate">To Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="restrictionType">
+            <span appTranslate="seatReservationApp.restrictions.restrictionType">Restriction Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="restrictionValue">
+            <span appTranslate="seatReservationApp.restrictions.restrictionValue">Restriction Value</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr [ngClass]="isCurrentRestriction(restrictions) ? 'current-restriction' : ''" *ngFor="let restrictions of restrictions; trackBy: trackId" data-cy="entityTable" class="tr-clickable" [routerLink]="['/restrictions', restrictions.id, 'view']">
+          <td>
+            <a (click)="$event.stopPropagation();" [routerLink]="['/restrictions', restrictions.id, 'view']">{{ restrictions.id }}</a>
+          </td>
+          <td>{{ restrictions.name }}</td>
+          <td>{{ restrictions.fromDate | formatMediumDatetime }}</td>
+          <td>{{ restrictions.toDate | formatMediumDatetime }}</td>
+          <td appTranslate="{{ 'seatReservationApp.RestrictionType.' + restrictions.restrictionType }}">
+            {{ restrictions.restrictionType }}
+          </td>
+          <td>{{ restrictions.restrictionValue }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" (click)="delete(restrictions); $event.stopPropagation();" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="restrictions && restrictions.length > 0">
+    <div class="d-flex justify-content-center">
+      <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+{
+  "seatReservationApp": {
+    "notificationAlert": {
+      "home": {
+        "title": "Notyfikacje",
+        "refreshListLabel": "Odśwież",
+        "createLabel": "Dodaj Notyfikacje",
+        "createOrEditLabel": "Dodaj lub edytuj: Notyfikacje",
+        "notFound": "Nie znaleziono notyfikacji"
+      },
+      "created": "Utworzono nowy obiekt typu Notyfikacja z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Notyfikacja z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Notyfikacja z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Notyfikacje {{ id }}?"
+      },
+      "detail": {
+        "title": "Notifikacja"
+      },
+      "id": "ID",
+      "title": "Tytuł",
+      "message": "Wiadomość",
+      "notificationPriority": "Priorytet",
+      "notificationState": "Stan",
+      "createdAt": "Data wysłania",
+      "userId": "Id Użytkownika"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="0030_KJA-148" author="gamma_team">
+        <createTable tableName="restrictions">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="from_date" type="${datetimeType}">
+                <constraints nullable="false" />
+            </column>
+            <column name="to_date" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="availability_percentage" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="availability_per_number_of_seats" type="integer">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+        <dropDefaultValue tableName="restrictions" columnName="from_date" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="restrictions" columnName="to_date" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <changeSet id="0031_KJA-148" author="gamma_team" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/restrictions.csv"
+                  separator=";"
+                  tableName="restrictions"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="name" type="string"/>
+            <column name="from_date" type="date"/>
+            <column name="to_date" type="date"/>
+            <column name="availability_percentage" type="numeric"/>
+            <column name="availability_per_number_of_seats" type="numeric"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,15 @@
+export enum EquipmentType {
+  MONITOR = 'MONITOR',
+
+  MOUSE = 'MOUSE',
+
+  KEYBOARD = 'KEYBOARD',
+
+  HEADPHONES = 'HEADPHONES',
+
+  DOCKING_STATION = 'DOCKING_STATION',
+
+  CAMERA = 'CAMERA',
+
+  NOTEBOOK = 'NOTEBOOK',
+}

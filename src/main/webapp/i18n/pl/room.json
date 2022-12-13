@@ -1,0 +1,32 @@
+{
+  "seatReservationApp": {
+    "room": {
+      "home": {
+        "title": "Pokój",
+        "refreshListLabel": "Odśwież",
+        "createLabel": "Dodaj Pokój",
+        "createOrEditLabel": "Dodaj lub edytuj: Pokój",
+        "notFound": "Nie znaleziono pokoi"
+      },
+      "created": "Utworzono nowy obiekt typu Pokój z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Pokój z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Pokój z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Pokój {{ id }}?"
+      },
+      "detail": {
+        "title": "Pokój"
+      },
+      "title": "Pokój",
+      "id": "ID",
+      "name": "Nazwa",
+      "map": "Map",
+      "status": "Status",
+      "roomType": "Typ pokoju",
+      "coordinates": "Współrzędne",
+      "dimensions": "Wymiary",
+      "seats": "Siedzenia",
+      "floor": "Piętro"
+    }
+  }
+}

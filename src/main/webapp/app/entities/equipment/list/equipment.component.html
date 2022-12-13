@@ -1,0 +1,103 @@
+<div>
+  <h2 id="page-heading" data-cy="EquipmentHeading">
+    <span appTranslate="seatReservationApp.equipment.home.title">Equipment</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="seatReservationApp.equipment.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-equipment"
+        [routerLink]="['/equipment/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="seatReservationApp.equipment.home.createLabel"> Create a new Equipment </span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="equipment?.length === 0">
+    <span appTranslate="seatReservationApp.equipment.home.notFound">No Equipment found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="equipment && equipment.length > 0">
+    <table class="table" aria-describedby="page-heading">
+      <thead>
+        <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" appSortBy="id"><span appTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" appSortBy="name">
+            <span appTranslate="seatReservationApp.equipment.name">Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="type">
+            <span appTranslate="seatReservationApp.equipment.type">Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="description">
+            <span appTranslate="seatReservationApp.equipment.description">Description</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" appSortBy="seat.id">
+            <span appTranslate="seatReservationApp.equipment.seat">Seat</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let equipment of equipment; trackBy: trackId" data-cy="entityTable" class="tr-clickable" [routerLink]="['/equipment', equipment.id, 'view']">
+          <td>
+            <a (click)="$event.stopPropagation();" [routerLink]="['/equipment', equipment.id, 'view']">{{ equipment.id }}</a>
+          </td>
+          <td>{{ equipment.name }}</td>
+          <td appTranslate="{{ 'seatReservationApp.EquipmentType.' + equipment.type }}">{{ equipment.type }}</td>
+          <td>{{ equipment.description }}</td>
+          <td>
+            <div *ngIf="equipment.seat">
+              <a (click)="$event.stopPropagation();" [routerLink]="['/seat', equipment.seat.id, 'view']">{{ equipment.seat.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <button
+              type="submit"
+              [routerLink]="['/equipment', equipment.id, 'edit']"
+              (click)="$event.stopPropagation();"
+              class="btn btn-primary btn-sm"
+              data-cy="entityEditButton"
+            >
+              <fa-icon icon="pencil-alt"></fa-icon>
+              <span class="d-none d-md-inline" appTranslate="entity.action.edit">Edit</span>
+            </button>
+
+            <button type="submit" (click)="delete(equipment); $event.stopPropagation();" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <fa-icon icon="times"></fa-icon>
+              <span class="d-none d-md-inline" appTranslate="entity.action.delete">Delete</span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="equipment && equipment.length > 0">
+    <div class="d-flex justify-content-center">
+      <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

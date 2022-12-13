@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="0180_KJA-148" author="gamma_team">
+        <createTable tableName="address">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="country" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="street" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="postal_code" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="city" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="state_province" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="0181_KJA-148" author="gamma_team" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/address.csv"
+                  separator=";"
+                  tableName="address"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="country" type="string"/>
+            <column name="street" type="string"/>
+            <column name="postal_code" type="string"/>
+            <column name="city" type="string"/>
+            <column name="state_province" type="string"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

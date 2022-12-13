@@ -1,0 +1,165 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="app-seat-reserved-heading"
+        data-cy="SeatReservedCreateUpdateHeading"
+        appTranslate="seatReservationApp.seatReserved.home.createOrEditLabel"
+      >
+        Create or edit a Seat Reserved
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" appTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" appTranslate="seatReservationApp.seatReserved.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" appTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" appTranslate="seatReservationApp.seatReserved.fromDate" for="field_fromDate">From Date</label>
+          <div class="d-flex">
+            <input
+              id="field_fromDate"
+              data-cy="fromDate"
+              type="datetime-local"
+              class="form-control"
+              name="fromDate"
+              formControlName="fromDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('fromDate')!.invalid && (editForm.get('fromDate')!.dirty || editForm.get('fromDate')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('fromDate')?.errors?.required"
+              appTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('fromDate')?.errors?.datetimelocal"
+              appTranslate="entity.validation.datetimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" appTranslate="seatReservationApp.seatReserved.toDate" for="field_toDate">To Date</label>
+          <div class="d-flex">
+            <input
+              id="field_toDate"
+              data-cy="toDate"
+              type="datetime-local"
+              class="form-control"
+              name="toDate"
+              formControlName="toDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" appTranslate="seatReservationApp.seatReserved.createdDate" for="field_createdDate">Created Date</label>
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('createdDate')!.invalid && (editForm.get('createdDate')!.dirty || editForm.get('createdDate')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('createdDate')?.errors?.required"
+              appTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('createdDate')?.errors?.datetimelocal"
+              appTranslate="entity.validation.datetimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" appTranslate="seatReservationApp.seatReserved.reservationStatus" for="field_reservationStatus"
+            >Reservation Status</label
+          >
+          <select
+            class="form-control"
+            name="reservationStatus"
+            formControlName="reservationStatus"
+            id="field_reservationStatus"
+            data-cy="reservationStatus"
+          >
+            <option [ngValue]="null">{{ 'seatReservationApp.ReservationStatus.null' | translate }}</option>
+            <option *ngFor="let reservationStatus of reservationStatusValues" [value]="reservationStatus">
+              {{ 'seatReservationApp.ReservationStatus.' + reservationStatus | translate }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              editForm.get('reservationStatus')!.invalid &&
+              (editForm.get('reservationStatus')!.dirty || editForm.get('reservationStatus')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('reservationStatus')?.errors?.required"
+              appTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" appTranslate="seatReservationApp.seatReserved.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareUser">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="userOption" *ngFor="let userOption of usersSharedCollection">{{ userOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

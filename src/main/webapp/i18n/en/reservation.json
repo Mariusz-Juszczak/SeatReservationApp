@@ -1,0 +1,8 @@
+{
+  "reservation": {
+    "title": "Reservation",
+    "description": "Choose place of reservation",
+    "reserve": "Reserve",
+    "map": "Map"
+  }
+}

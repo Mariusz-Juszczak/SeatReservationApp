@@ -1,0 +1,10 @@
+{
+  "seatReservationApp": {
+    "ReservationStatus": {
+      "null": "",
+      "ACTIVE": "ACTIVE",
+      "CANCELLED": "CANCELLED",
+      "PENDING": "PENDING"
+    }
+  }
+}

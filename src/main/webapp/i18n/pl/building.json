@@ -1,0 +1,28 @@
+{
+  "seatReservationApp": {
+    "building": {
+      "home": {
+        "title": "Budynek",
+        "refreshListLabel": "Odśwież",
+        "createLabel": "Dodaj Budynek",
+        "createOrEditLabel": "Dodaj lub edytuj: Budynek",
+        "notFound": "Nie znaleziono budynków"
+      },
+      "created": "Utworzono nowy obiekt typu Budynek z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Budynek z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Budynek z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Budynek {{ id }}?"
+      },
+      "detail": {
+        "title": "Budynek"
+      },
+      "title": "Budynek",
+      "id": "ID",
+      "name": "Nazwa",
+      "address": "Adres",
+      "floors": "Piętra",
+      "location": "Lokacja"
+    }
+  }
+}

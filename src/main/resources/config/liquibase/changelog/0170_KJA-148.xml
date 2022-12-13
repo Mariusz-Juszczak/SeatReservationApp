@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="0170_KJA-148" author="gamma_team">
+        <createTable tableName="seat_reserved">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="from_date" type="${datetimeType}">
+                <constraints nullable="false" />
+            </column>
+            <column name="to_date" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_date" type="${datetimeType}">
+                <constraints nullable="false" />
+            </column>
+            <column name="reservation_status" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="true" unique="false"/>
+            </column>
+            <column name="seat_id" type="bigint">
+                <constraints nullable="true" unique="false"/>
+            </column>
+        </createTable>
+        <dropDefaultValue tableName="seat_reserved" columnName="from_date" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="seat_reserved" columnName="to_date" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="seat_reserved" columnName="created_date" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <changeSet id="0171_KJA-148" author="gamma_team" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/seat_reserved.csv"
+                  separator=";"
+                  tableName="seat_reserved"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="name" type="string"/>
+            <column name="from_date" type="date"/>
+            <column name="to_date" type="date"/>
+            <column name="created_date" type="date"/>
+            <column name="reservation_status" type="string"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

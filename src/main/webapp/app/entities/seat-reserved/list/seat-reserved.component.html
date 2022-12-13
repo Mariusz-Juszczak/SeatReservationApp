@@ -1,0 +1,116 @@
+<div>
+  <h2 id="page-heading" data-cy="SeatReservedHeading">
+    <span appTranslate="{{ 'seatReservationApp.seatReserved.home.titleType.' + getReservationViewMode() }}">Reservations</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="seatReservationApp.seatReserved.home.refreshListLabel">Refresh list</span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="seatReserveds?.length === 0">
+    <span appTranslate="seatReservationApp.seatReserved.home.notFound">No Reserved seats found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="seatReserveds && seatReserveds.length > 0">
+    <table class="table" aria-describedby="page-heading">
+      <thead>
+      <tr appSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+        <th scope="col" appSortBy="id">
+          <span appTranslate="seatReservationApp.seatReserved.id">Id</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" appSortBy="fromDate">
+          <span appTranslate="seatReservationApp.seatReserved.fromDate">From Date</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" appSortBy="toDate">
+          <span appTranslate="seatReservationApp.seatReserved.toDate">To Date</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" appSortBy="createdDate">
+          <span appTranslate="seatReservationApp.seatReserved.createdDate">Created Date</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" appSortBy="seat.room.floor.building.location.name">
+          <span appTranslate="seatReservationApp.location.title">Location</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" appSortBy="seat.room.floor.building.name">
+          <span appTranslate="seatReservationApp.building.title">Building</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" appSortBy="seat.room.floor.name">
+          <span appTranslate="seatReservationApp.floor.title">Floor</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" appSortBy="seat.room.name">
+          <span appTranslate="seatReservationApp.room.title">Room</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" appSortBy="seat.name">
+          <span appTranslate="seatReservationApp.seat.title">Seat</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th *ngIf="getReservationViewMode() === 'ALL' || getReservationViewMode() === 'PENDING'" scope="col" appSortBy="user.lastName, user.firstName">
+          <span appTranslate="userManagement.title">User</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" appSortBy="reservationStatus">
+          <span appTranslate="seatReservationApp.seatReserved.reservationStatus">Reservation Status</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let seatReserved of seatReserveds; trackBy: trackId" data-cy="entityTable" class="tr-clickable" [routerLink]="[getReservationViewMode() === 'USER' ? '/my-reservations' : '/seat-reserved', seatReserved.id, 'view']"  >
+        <td>{{ seatReserved.id }}</td>
+        <td>{{ seatReserved.fromDate | formatMediumDatetime }}</td>
+        <td>{{ seatReserved.toDate | formatMediumDatetime }}</td>
+        <td>{{ seatReserved.createdDate | formatMediumDatetime }}</td>
+        <td>{{ seatReserved.locationName }}</td>
+        <td>{{ seatReserved.buildingName}} <span *ngIf="seatReserved.buildingAddress">({{ seatReserved.buildingAddress}})</span></td>
+        <td>{{ seatReserved.floorName }}</td>
+        <td>{{ seatReserved.roomName }}</td>
+        <td>{{ seatReserved.seatName }}</td>
+        <td *ngIf="getReservationViewMode() === 'ALL' || getReservationViewMode() === 'PENDING'">{{ seatReserved.user?.lastName }}, {{ seatReserved.user?.firstName }}</td>
+        <td appTranslate="{{ 'seatReservationApp.ReservationStatus.' + seatReserved.reservationStatus }}">
+          {{ seatReserved.reservationStatus }}
+        </td>
+        <td class="text-end">
+          <button *ngIf="seatReserved.reservationStatus === 'PENDING' && (getReservationViewMode() === 'ALL' || getReservationViewMode() === 'PENDING')"
+                  type="submit" (click)="approve(seatReserved); $event.stopPropagation();"
+                  class="btn btn-primary btn-sm"
+          >
+            <fa-icon icon="check"></fa-icon>
+            <span class="d-none d-md-inline" appTranslate="entity.action.approve">Approve</span>
+          </button>
+
+          <button *ngIf="seatReserved.reservationStatus !== 'CANCELLED'"
+                  type="submit"
+                  (click)="cancel(seatReserved); $event.stopPropagation();"
+                  class="btn btn-danger btn-sm"
+                  data-cy="entityDeleteButton">
+            <fa-icon icon="times"></fa-icon>
+            <span class="d-none d-md-inline" appTranslate="entity.action.cancel">Cancel</span>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="seatReserveds && seatReserveds.length > 0">
+    <div class="d-flex justify-content-center">
+      <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+id;login;password_hash;first_name;last_name;email;image_url;activated;lang_key;created_by;last_modified_by
+1;admin;$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC;Administrator;Administrator;admin@localhost;;true;en;system;system
+2;user;$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K;User;User;user@localhost;;true;en;system;system
+3;krak;$2a$12$xx3NVj1ZtbAw6KuWZjwj...IO7eJDSnDS/ZVwmvgCgYANCNYc/xUO;Krak;Admin;krak@admin;;true;en;system;system
+4;wroc;$2a$12$xRBdi1Sz3LQwR1VsW.pkx.M3mdSV5QGKb6gye/Xo7fI5b7ddGuRgO;Wroc;Admin;wroc@admin;;true;en;system;system
+5;kosz;$2a$12$H5UJK8/ZeGVlU8RL.3uLXu1i1ad2G6Fs1CVfNqmPqQb2UhHmnYUX2;Kosz;Admin;kosz@admin;;true;en;system;system
+6;szcz;$2a$12$VM30DhhCTpCt4xmgZej9GOIWIKuvhNEAl4Euj.Lzn.Mvi8ruv2fo6;Szcz;Admin;szcz@admin;;true;en;system;system
+7;adrjan;$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K;Adrian;Duda;a.duda@o2.pl;;true;pl;system;system
+8;naomi;$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K;Naomi;Osaka;naomi.osaka@wta.com;;true;en;system;system
+9;shashank;$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K;Shashank;Samant;shashank34@wp.pl;;true;en;system;system

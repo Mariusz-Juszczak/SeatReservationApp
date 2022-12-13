@@ -1,0 +1,58 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import 'src/main/webapp/content/scss/gl-variables';
+
+/* ==========================================================================
+Navbar
+========================================================================== */
+
+.navbar-version {
+  font-size: 0.65em;
+  color: $navbar-dark-color;
+}
+
+.profile-image {
+  height: 1.75em;
+  width: 1.75em;
+}
+
+.navbar {
+  padding: 0.2rem 1rem;
+
+  a.nav-link {
+    font-weight: 400;
+  }
+}
+
+.navbar-accent {
+  background-color: $global-logic-color;
+  border-radius: 5px;
+
+  a.nav-link {
+    color: white;
+  }
+}
+
+.navbar-accent:hover {
+  a.nav-link {
+    color: $global-logic-text-color;
+  }
+}
+
+.navbar-accent:focus {
+  a.nav-link {
+    color: $global-logic-text-color;
+  }
+}
+
+/* ==========================================================================
+Logo styles
+========================================================================== */
+.logo-img {
+  height: 45px;
+  width: 45px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url('../../../content/images/gl-logo-transparent.png') no-repeat center center;
+  background-size: contain;
+}

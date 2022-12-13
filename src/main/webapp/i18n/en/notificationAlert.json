@@ -1,0 +1,29 @@
+{
+  "seatReservationApp": {
+    "notificationAlert": {
+      "home": {
+        "title": "Notifications",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Notification Alert",
+        "createOrEditLabel": "Create or edit a Notification Alert",
+        "notFound": "No Notifications found"
+      },
+      "created": "A new Notification Alert is created with identifier {{ param }}",
+      "updated": "A Notification Alert is updated with identifier {{ param }}",
+      "deleted": "A Notification Alert is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Notification Alert {{ id }}?"
+      },
+      "detail": {
+        "title": "Notification"
+      },
+      "id": "ID",
+      "title": "Title",
+      "message": "Message",
+      "notificationPriority": "Notification Priority",
+      "notificationState": "Notification State",
+      "createdAt": "Created At",
+      "userId": "User Id"
+    }
+  }
+}

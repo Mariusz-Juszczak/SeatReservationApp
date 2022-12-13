@@ -1,0 +1,57 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="floor">
+      <h2 data-cy="floorDetailsHeading"><span appTranslate="seatReservationApp.floor.detail.title">Floor</span></h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ floor.id }}</span>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.floor.name">Name</span></dt>
+        <dd>
+          <span>{{ floor.name }}</span>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.floor.number">Number</span></dt>
+        <dd>
+          <span>{{ floor.number }}</span>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.floor.map">Map</span></dt>
+        <dd>
+          <div *ngIf="floor.map">
+            <a (click)="openFile(floor.map, floor.mapContentType)">
+              <img [src]="'data:' + floor.mapContentType + ';base64,' + floor.map" style="max-width: 100%" alt="floor image" />
+            </a>
+            {{ floor.mapContentType }}, {{ byteSize(floor.map) }}
+          </div>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.floor.dimensions">Dimensions</span></dt>
+        <dd>
+          <div *ngIf="floor.dimensions">
+            <span >({{ floor.dimensions.height }} x {{ floor.dimensions.width }})</span>
+          </div>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.floor.building">Building</span></dt>
+        <dd>
+          <div *ngIf="floor.building">
+            <a [routerLink]="['/building', floor.building.id, 'view']">{{ floor.building.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/floor', floor.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

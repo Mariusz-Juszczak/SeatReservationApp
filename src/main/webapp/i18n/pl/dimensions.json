@@ -1,0 +1,28 @@
+{
+  "seatReservationApp": {
+    "dimensions": {
+      "home": {
+        "title": "Wymiary",
+        "refreshListLabel": "Odśwież",
+        "createLabel": "Dodaj Wymiar",
+        "createOrEditLabel": "Dodaj lub edytuj: Wymiar",
+        "notFound": "Nie znaleziono wymiarów"
+      },
+      "created": "Utworzono nowy obiekt typu Wymiar z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Wymiar z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Wymiar z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Wymiar {{ id }}?"
+      },
+      "detail": {
+        "title": "Wymiar"
+      },
+      "id": "ID",
+      "height": "Wysokość",
+      "width": "Szerokość",
+      "seat": "Siedzenie",
+      "room": "Pokój",
+      "floor": "Piętro"
+    }
+  }
+}

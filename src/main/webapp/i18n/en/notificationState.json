@@ -1,0 +1,10 @@
+{
+  "seatReservationApp": {
+    "NotificationState": {
+      "null": "",
+      "NEW": "NEW",
+      "READ": "READ",
+      "DELETED": "DELETED"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "seatReservationApp": {
+    "seatReserved": {
+      "home": {
+        "titleType": {
+          "USER": "My reservations",
+          "PENDING": "Pending reservations",
+          "ALL": "All reservations"
+        },
+        "title": "Reservations",
+        "titleOwn": "My reservations",
+        "titleAll": "All reservations",
+        "titlePending": "Pending reservations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Reservation",
+        "createOrEditLabel": "Create or edit a Reservation",
+        "notFound": "No reservations found"
+      },
+      "created": "A new Reservation is created with identifier {{ param }}",
+      "updated": "A Reservation is updated with identifier {{ param }}",
+      "deleted": "A Reservation is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Reservation {{ id }}?"
+      },
+      "detail": {
+        "title": "Reservation"
+      },
+      "id": "ID",
+      "name": "Name",
+      "fromDate": "From Date",
+      "toDate": "To Date",
+      "createdDate": "Created Date",
+      "reservationStatus": "Reservation Status",
+      "user": "User",
+      "seat": "Seat"
+    }
+  }
+}

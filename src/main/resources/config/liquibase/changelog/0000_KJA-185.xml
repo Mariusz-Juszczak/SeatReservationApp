@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="0000_KJA-185" author="gamma_team">
+        <delete tableName="restrictions">
+            <where>id>0</where>
+        </delete>
+    </changeSet>
+
+    <changeSet id="0001_KJA-185" author="gamma_team">
+        <renameColumn columnDataType="double"
+                      newColumnName="restriction_type"
+                      oldColumnName="availability_percentage"
+                      tableName="restrictions"/>
+        <renameColumn columnDataType="integer"
+                      newColumnName="restriction_value"
+                      oldColumnName="availability_per_number_of_seats"
+                      tableName="restrictions"/>
+        <modifyDataType columnName="restriction_type"
+                        newDataType="varchar(255)"
+                        tableName="restrictions"/>
+    </changeSet>
+
+    <changeSet id="0002_KJA-185" author="jhipster" context="faker">
+        <loadData
+            file="config/liquibase/fake-data/restrictions1.csv"
+            separator=";"
+            tableName="restrictions"
+            usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="name" type="string"/>
+            <column name="from_date" type="date"/>
+            <column name="to_date" type="date"/>
+            <column name="restriction_type" type="string"/>
+            <column name="restriction_value" type="numeric"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

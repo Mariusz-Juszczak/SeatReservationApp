@@ -1,0 +1,16 @@
+id;name;type;description;seat_id
+1;Wireless Mouse;MOUSE;Wireless mouse LOGITECH;1
+2;Keyboard;KEYBOARD;MICROSOFT All-In-One Media Keyboard N9Z-00022;1
+3;Monitor 4K;MONITOR;Huawei Monitor MateView;6
+4;Wired Headphones;HEADPHONES;Samsung Type-C Headphones;2
+5;Docking Station;DOCKING_STATION;Docking station Dell 452-BBOT;3
+6;Camera;CAMERA;Camera LOGITECH HD Pro C920 960-001055;4
+7;Notebook;NOTEBOOK;Ultrabook HUAWEI Matebook D15 i3-1115G4;5
+8;Wireless Mouse;MOUSE;Wireless mouse LOGITECH;7
+9;Wireless Mouse;MOUSE;Wireless mouse SAMSUNG;8
+10;Wireless Mouse;MOUSE;Wireless mouse HUAWEI;9
+11;Monitor 4K;MONITOR;Huawei Monitor MateView;10
+12;Monitor Ultra HD;MONITOR;Samsung Monitor 4K;11
+13;Monitor Curved;MONITOR;Samsung Monitor Curver;12
+14;Wireless Headphones;HEADPHONES;Apple airpods MAX;13
+15;Wired Headphones;HEADPHONES;Samsung wireless headphones;14

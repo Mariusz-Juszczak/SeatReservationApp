@@ -1,0 +1,4 @@
+id;name;from_date;to_date;restriction_type;restriction_value
+1;First covid restriction;2020-02-02T01:13:02;2020-05-08T10:55:58;PERCENTAGE;25
+2;Second covid restriction;2021-06-08T11:52:23;2022-04-08T06:33:06;PER_SEATS_NUMBER;2
+3;Third covid restriction;2022-02-08T02:27:01;2022-12-25T11:05:18;PERCENTAGE;75

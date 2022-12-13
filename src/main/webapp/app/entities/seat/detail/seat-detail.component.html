@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="seat">
+      <h2 data-cy="seatDetailsHeading"><span appTranslate="seatReservationApp.seat.detail.title">Seat</span></h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ seat.id }}</span>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.seat.seatNumber">Seat Number</span></dt>
+        <dd>
+          <span>{{ seat.seatNumber }}</span>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.seat.name">Name</span></dt>
+        <dd>
+          <span>{{ seat.name }}</span>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.seat.status">Status</span></dt>
+        <dd>
+          <span appTranslate="{{ 'seatReservationApp.AvailabilityStatus.' + seat.status }}">{{ seat.status }}</span>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.seat.coordinates">Coordinates</span></dt>
+        <dd>
+          <div *ngIf="seat.coordinates">
+            ({{ seat.coordinates.fromTop }} x {{ seat.coordinates.fromLeft }}) - {{ seat.coordinates.angle }}°
+          </div>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.seat.dimensions">Dimensions</span></dt>
+        <dd>
+          <div *ngIf="seat.dimensions">
+            <span>({{ seat.dimensions.height }} x {{ seat.dimensions.width }})</span>
+          </div>
+        </dd>
+        <dt><span appTranslate="seatReservationApp.seat.room">Room</span></dt>
+        <dd>
+          <div *ngIf="seat.room">
+            <a [routerLink]="['/room', seat.room.id, 'view']">{{ seat.room.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/seat', seat.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

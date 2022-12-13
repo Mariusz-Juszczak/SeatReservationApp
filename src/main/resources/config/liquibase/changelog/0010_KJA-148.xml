@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="0010_KJA-148" author="gamma_team">
+
+        <addForeignKeyConstraint baseColumnNames="location_id"
+                                 baseTableName="rel_location__location_admins"
+                                 constraintName="fk_rel_location__location_admins__location_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="location"/>
+
+        <addForeignKeyConstraint baseColumnNames="location_admins_id"
+                                 baseTableName="rel_location__location_admins"
+                                 constraintName="fk_rel_location__location_admins__location_admins_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+    </changeSet>
+</databaseChangeLog>

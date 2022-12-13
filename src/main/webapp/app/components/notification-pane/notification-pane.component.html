@@ -1,0 +1,19 @@
+<div *ngIf="notification" class="shadow-pane">
+  <div [ngClass]="'container shadow p-3 mb-5 bg-white rounded  notification-global-logic-alert-' + notification.notificationPriority">
+
+    <button class="close-button" aria-label="Close alert" type="button" data-close (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+
+    <h5>
+      {{notification.title}}
+    </h5>
+    <p>
+      {{notification.message}}
+    </p>
+
+    <div class="notification-created-at">
+      {{notification.createdAt | formatMediumDatetime}}
+    </div>
+  </div>
+</div>

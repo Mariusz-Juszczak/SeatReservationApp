@@ -1,0 +1,38 @@
+{
+  "seatReservationApp": {
+    "seatReserved": {
+      "home": {
+        "titleType": {
+          "USER": "Moje Rezerwacje",
+          "PENDING": "Oczekujące Rezerwacje",
+          "ALL": "Wszystkie Rezerwacje"
+        },
+        "title": "Rezerwacje",
+        "titleOwn": "Moje Rezerwacje",
+        "titleAll": "Wszystkie Rezerwacje",
+        "titlePending": "Oczekujące Rezerwacje",
+        "refreshListLabel": "Odśwież",
+        "createLabel": "Dodaj Rezerwację",
+        "createOrEditLabel": "Dodaj lub edytuj: Rezerwację",
+        "notFound": "Nie znalezionio żadnych rezerwacji"
+      },
+      "created": "Utworzono nowy obiekt typu Rezerwacja z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Rezerwacja z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Rezerwacja z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Rezerwacje {{ id }}?"
+      },
+      "detail": {
+        "title": "Rezerwacja"
+      },
+      "id": "ID",
+      "name": "Nazwa",
+      "fromDate": "Od",
+      "toDate": "Do",
+      "createdDate": "Data utworzenia",
+      "reservationStatus": "Status rezerwacji",
+      "user": "Użytkownik",
+      "seat": "Seat"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "seatReservationApp": {
+    "coordinates": {
+      "home": {
+        "title": "Coordinates",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Coordinates",
+        "createOrEditLabel": "Create or edit a Coordinates",
+        "notFound": "No Coordinates found"
+      },
+      "created": "A new Coordinates is created with identifier {{ param }}",
+      "updated": "A Coordinates is updated with identifier {{ param }}",
+      "deleted": "A Coordinates is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Coordinates {{ id }}?"
+      },
+      "detail": {
+        "title": "Coordinates"
+      },
+      "id": "ID",
+      "fromTop": "From Top",
+      "fromLeft": "From Left",
+      "angle": "Angle",
+      "seat": "Seat",
+      "room": "Room"
+    }
+  }
+}
